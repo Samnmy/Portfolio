@@ -10,11 +10,18 @@ import { useLanguage } from '@/context/LanguageContext';
 
 
 
+interface ContactItem {
+  icon: React.ElementType;
+  label: string;
+  value: string;
+  href?: string;
+}
+
 function ContactCard({
   item,
   index,
 }: {
-  item: (typeof contactInfo)[0];
+  item: ContactItem;
   index: number;
 }) {
   const content = (
@@ -61,26 +68,26 @@ export function ContactSection() {
     {
       icon: Mail,
       label: t('contact.labels.email'),
-      value: 'hello@johndoe.dev',
-      href: 'mailto:hello@johndoe.dev',
+      value: 'samuel.monsalve.orrego@gmail.com',
+      href: 'mailto:samuel.monsalve.orrego@gmail.com',
     },
     {
       icon: Linkedin,
       label: t('contact.labels.linkedin'),
-      value: 'linkedin.com/in/johndoe',
-      href: 'https://linkedin.com/in/johndoe',
+      value: 'linkedin.com/in/samuel-monsalve-orrego',
+      href: 'https://linkedin.com/in/samuel-monsalve-orrego',
     },
     {
       icon: Github,
       label: t('contact.labels.github'),
-      value: 'github.com/johndoe',
-      href: 'https://github.com/johndoe',
+      value: 'github.com/Samnmy',
+      href: 'https://github.com/Samnmy',
     },
     {
       icon: MapPin,
       label: t('contact.labels.location'),
-      value: 'San Francisco, CA',
-      href: null,
+      value: 'Medellín, Colombia',
+      href: 'https://www.google.com/maps/place/Medell%C3%ADn,+Antioquia/@6.2442872,-75.6224111,13z/data=!3m1!4b1!4m6!3m5!1s0x8e4428dfb80fad05:0x42137cfcc7b53b56!8m2!3d6.2476376!4d-75.5658153!16zL20vMDF4XzZz?entry=ttu&g_ep=EgoyMDI2MDIxMC4wIKXMDSoASAFQAw%3D%3D',
     },
   ];
 
