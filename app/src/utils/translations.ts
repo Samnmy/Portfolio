@@ -12,7 +12,7 @@ export const translations = {
       badge: 'Available for new opportunities',
       greeting: "Hi, I'm",
       role: 'Full-Stack Developer',
-      description: 'I craft elegant, scalable web applications with modern technologies. Passionate about clean code, great user experiences, and turning complex problems into simple solutions.',
+      description: 'I build robust and scalable web applications, combining solid backend architecture with clean, functional interfaces. I’m passionate about well-structured code, intentional simplicity, and crafting experiences that transform complexity into clear and efficient solutions.',
       ctaPrimary: "Let's Work Together",
       ctaSecondary: 'View My Work',
       scroll: 'Scroll',
@@ -20,7 +20,7 @@ export const translations = {
     about: {
       title: 'About',
       titleHighlight: 'Me',
-      description: "I'm a passionate Full-Stack Developer with 5+ years of experience building web applications that make a difference. I specialize in React, Node.js, and cloud technologies, creating seamless experiences from frontend to backend.",
+      description: "I am a Full-Stack Developer with a strong track record of building high-impact web applications. I specialize in Java, Spring Boot, JavaScript, and cloud technologies, architecting robust, secure, and scalable solutions grounded in clean architecture principles and industry best practices. My approach blends technical precision, strategic thinking, and meticulous attention to detail to deliver efficient digital products that drive real business value.",
       quote: "I believe great software is built with attention to detail, empathy for users, and a commitment to continuous improvement. Every line of code is an opportunity to create something meaningful.",
       features: {
         cleanCode: {
@@ -151,7 +151,7 @@ export const translations = {
       badge: 'Disponible para nuevas oportunidades',
       greeting: 'Hola, soy',
       role: 'Desarrollador Full-Stack',
-      description: 'Creo aplicaciones web elegantes y escalables con tecnologías modernas. Apasionado por el código limpio, grandes experiencias de usuario y convertir problemas complejos en soluciones simples.',
+      description: 'Desarrollo aplicaciones web robustas y escalables, combinando una arquitectura backend sólida con interfaces limpias y funcionales. Me apasiona el código bien estructurado, la simplicidad intencional y crear experiencias que convierten la complejidad en soluciones claras y eficientes. ',
       ctaPrimary: 'Trabajemos Juntos',
       ctaSecondary: 'Ver Mis Proyectos',
       scroll: 'Deslizar',
@@ -159,7 +159,7 @@ export const translations = {
     about: {
       title: 'Sobre',
       titleHighlight: 'Mí',
-      description: "Soy un desarrollador Full-Stack apasionado con más de 5 años de experiencia creando aplicaciones web que marcan la diferencia. Me especializo en React, Node.js y tecnologías en la nube, creando experiencias fluidas desde el frontend hasta el backend.",
+      description: "Soy un desarrollador Full-Stack con una sólida trayectoria en la creación de aplicaciones web de alto impacto. Me especializo en Java, Spring Boot, JavaScript y tecnologías en la nube, diseñando soluciones robustas, seguras y escalables bajo principios de arquitectura limpia y buenas prácticas. Mi enfoque combina precisión técnica, visión estratégica y atención al detalle para construir productos digitales eficientes que generan valor real.",
       quote: "Creo que el gran software se construye con atención al detalle, empatía por los usuarios y un compromiso con la mejora continua. Cada línea de código es una oportunidad para crear algo significativo.",
       features: {
         cleanCode: {
