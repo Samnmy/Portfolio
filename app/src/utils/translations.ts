@@ -80,27 +80,26 @@ export const translations = {
       title: 'Experience &',
       titleHighlight: 'Education',
       description: 'My professional journey and educational background that shaped my development career.',
-      jobs: {
-        techCorp: {
-          title: 'Senior Full-Stack Developer',
-          description: 'Leading development of enterprise SaaS platform serving 50k+ users. Architected microservices infrastructure and mentored junior developers.',
-          achievements: ['Reduced API response time by 40%', 'Led team of 5 developers', 'Implemented CI/CD pipelines'],
-        },
-        startupXYZ: {
-          title: 'Full-Stack Developer',
-          description: 'Built and scaled multiple web applications from MVP to production. Collaborated closely with product and design teams.',
-          achievements: ['Shipped 3 products to market', 'Grew user base to 10k+', 'Integrated third-party APIs'],
-        },
-        digitalAgency: {
-          title: 'Frontend Developer',
-          description: 'Developed responsive web applications and landing pages for diverse clients. Focused on performance and accessibility.',
-          achievements: ['Delivered 20+ client projects', 'Improved Core Web Vitals', 'Built component library'],
-        },
+      education: {
         university: {
-          title: 'B.S. Computer Science',
-          organization: 'University of Technology',
-          description: 'Graduated with honors. Specialized in software engineering and web technologies.',
-          achievements: ["Dean's List", 'Senior capstone project winner', 'Computer Science Club president'],
+          title: 'Software Development Engineering',
+          description: 'Software Development Engineering student with experience in the development of web applications and software, in constant learning and personal growth.',
+          achievements: ['Constant learning', 'Clean code improvement', 'Soft skills improvement'],
+        },
+        riwi: {
+          title: 'Full-Stack Developer',
+          description: 'Improved technical skills by building and scaling multiple web applications from MVP to production. Close collaboration in project teams, agile methodologies and software development and improvement of soft skills.',
+          achievements: ['Raising projects from scratch', 'Devops methodologies', 'Integrated third-party APIs', 'Soft skills improvement', 'Implementation of Artificial Intelligences'],
+        },
+        quipux: {
+          title: 'Software Developer',
+          description: 'Development of responsive web applications and use of process automation. Focus on learning work methodologies in software development.',
+          achievements: ['Teamwork skills', 'Improvement in code quality', 'Process automation', 'Learning the software development process'],
+        },
+        tecnicoEnSistemas: {
+          title: 'Systems technician',
+          description: 'Graduated with honors. Specialized in software development and web technologies.',
+          achievements: ["Degree project", 'Degree project leader', 'Programming competition'],
         },
       },
     },
@@ -219,27 +218,26 @@ export const translations = {
       title: 'Experiencia y',
       titleHighlight: 'Educación',
       description: 'Mi trayectoria profesional y antecedentes educativos que formaron mi carrera de desarrollo.',
-      jobs: {
-        techCorp: {
-          title: 'Desarrollador Full-Stack Senior',
-          description: 'Liderando el desarrollo de plataforma SaaS empresarial sirviendo a más de 50k usuarios. Arquitectura de microservicios e infraestructura y mentoría a desarrolladores junior.',
-          achievements: ['Reducción del tiempo de respuesta API en 40%', 'Lideré equipo de 5 desarrolladores', 'Implementación de pipelines CI/CD'],
-        },
-        startupXYZ: {
-          title: 'Desarrollador Full-Stack',
-          description: 'Construcción y escalado de múltiples aplicaciones web desde MVP hasta producción. Colaboración estrecha con equipos de producto y diseño.',
-          achievements: ['Lanzamiento de 3 productos al mercado', 'Crecimiento de base de usuarios a 10k+', 'Integración de APIs de terceros'],
-        },
-        digitalAgency: {
-          title: 'Desarrollador Frontend',
-          description: 'Desarrollo de aplicaciones web responsivas y landing pages para diversos clientes. Enfoque en rendimiento y accesibilidad.',
-          achievements: ['Entrega de 20+ proyectos de clientes', 'Mejora de Core Web Vitals', 'Construcción de librería de componentes'],
-        },
+      education: {
         university: {
-          title: 'Licenciatura en Ciencias de la Computación',
-          organization: 'Universidad de Tecnología',
-          description: 'Graduado con honores. Especializado en ingeniería de software y tecnologías web.',
-          achievements: ["Lista del Decano", 'Ganador del proyecto final', 'Presidente del Club de Ciencias de la Computación'],
+          title: 'Ingenieria en Desarrollo de Software',
+          description: 'Estudiante de Ingenieria en Desarrollo de Software con experiencia en el desarrollo de aplicaciones web y software, en constante aprendizaje y crecimiento personal.',
+          achievements: ['Aprendizaje constante', 'Mejora de codigo limpio', 'Mejora de habilidades blandas'],
+        },
+        riwi: {
+          title: 'Desarrollador Full-Stack',
+          description: 'Mejora de habilidades tecnicas mediante la construcción y escalado de múltiples aplicaciones web desde MVP hasta producción. Colaboración estrecha en equipos de proyectos, metodologias ágiles y desarrollo de software y mejora de habilidades blandas.',
+          achievements: ['Levantamiento de proyectos desde cero', 'Metodologias devops', 'Integración de APIs de terceros', 'Mejora de habilidades blandas', 'Implementación de Inteligencias Artificiales'],
+        },
+        quipux: {
+          title: 'Desarrollador de Software',
+          description: 'Desarrollo de aplicaciones web responsivas y uso de automatización de procesos. Enfoque en el aprendimiento de las metodologias de trabajo en desarrollo de software.',
+          achievements: ['Habilidades en trabajo en equipo', 'Mejora en la calidad de codigo', 'Automatización de procesos', 'Aprendizaje del proceso de desarrollo de software'],
+        },
+        tecnicoEnSistemas: {
+          title: 'Tecnico en Sistemas',
+          description: 'Graduado con honores. Especializado en desarrollo de software y tecnologías web.',
+          achievements: ["Proyecto de grado", 'Lider del proyecto de grado', 'Competencia de programación'],
         },
       },
     },

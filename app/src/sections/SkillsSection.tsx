@@ -20,14 +20,13 @@ interface SkillCategory {
 
 const additionalSkills = [
   'REST APIs',
-  'Redux',
-  'Jest',
-  'Cypress',
+  'Python',
+  'Azure',
+  'Power BI',
   'Figma',
-  'Prisma',
-  'Redis',
-  'Kubernetes',
-  'Terraform',
+  'Jira',
+  'Git & GitHub',
+  'Docker',
   'Agile/Scrum',
 ];
 
@@ -78,22 +77,22 @@ export function SkillsSection() {
       id: 'frontend',
       title: t('skills.categories.frontend'),
       skills: [
-        { name: 'React', level: 95 },
-        { name: 'TypeScript', level: 90 },
-        { name: 'Next.js', level: 85 },
-        { name: 'Tailwind CSS', level: 95 },
-        { name: 'Vue.js', level: 75 },
+        { name: 'JavaScript', level: 90 },
+        { name: 'TypeScript', level: 80 },
+        { name: 'Angular', level: 75 },
+        { name: 'Tailwind CSS', level: 80 },
+        { name: 'Bootstrap', level: 75 },
       ],
     },
     {
       id: 'backend',
       title: t('skills.categories.backend'),
       skills: [
-        { name: 'Node.js', level: 90 },
-        { name: 'Python', level: 80 },
+        { name: 'Spring Boot', level: 90 },
+        { name: 'Java', level: 90 },
         { name: 'PostgreSQL', level: 85 },
         { name: 'MongoDB', level: 80 },
-        { name: 'GraphQL', level: 75 },
+        { name: 'MySQL', level: 80 },
       ],
     },
     {
