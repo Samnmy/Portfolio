@@ -15,7 +15,10 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 import { translations } from '../utils/translations';
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>('en');
+  // First visit → 'en'. Returning visit → whatever was saved.
+  const [language, setLanguageState] = useState<Language>(() => {
+    return (localStorage.getItem('language') as Language) || 'en';
+  });
 
   // Helper to get nested properties from translations object
   const getNestedTranslation = (obj: any, path: string): string => {
@@ -27,8 +30,13 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     return translation;
   };
 
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
+    localStorage.setItem('language', lang);
+  };
+
   const toggleLanguage = () => {
-    setLanguage((prev) => (prev === 'en' ? 'es' : 'en'));
+    setLanguage(language === 'en' ? 'es' : 'en');
   };
 
   return (

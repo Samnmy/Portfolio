@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, Github, MapPin, Send } from 'lucide-react';
+import { Mail, Linkedin, Github, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 import { FadeIn } from '@/components/animations/FadeIn';
 import { GradientText } from '@/components/animations/GradientText';
 import { Button } from '@/components/ui/button';
@@ -8,7 +9,9 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useLanguage } from '@/context/LanguageContext';
 
-
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID as string;
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string;
 
 interface ContactItem {
   icon: React.ElementType;
@@ -17,13 +20,7 @@ interface ContactItem {
   href?: string;
 }
 
-function ContactCard({
-  item,
-  index,
-}: {
-  item: ContactItem;
-  index: number;
-}) {
+function ContactCard({ item, index }: { item: ContactItem; index: number }) {
   const content = (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -36,9 +33,9 @@ function ContactCard({
       <div className="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center flex-shrink-0">
         <item.icon className="w-5 h-5 text-purple-400" />
       </div>
-      <div>
+      <div className="min-w-0">
         <p className="text-sm text-muted-foreground">{item.label}</p>
-        <p className="text-foreground font-medium">{item.value}</p>
+        <p className="text-foreground font-medium break-all">{item.value}</p>
       </div>
     </motion.div>
   );
@@ -54,15 +51,14 @@ function ContactCard({
   return content;
 }
 
+type SendState = 'idle' | 'sending' | 'sent' | 'error';
+
 export function ContactSection() {
   const { t } = useLanguage();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [sendState, setSendState] = useState<SendState>('idle');
 
   const contactInfo = [
     {
@@ -87,33 +83,96 @@ export function ContactSection() {
       icon: MapPin,
       label: t('contact.labels.location'),
       value: 'Medellín, Colombia',
-      href: 'https://www.google.com/maps/place/Medell%C3%ADn,+Antioquia/@6.2442872,-75.6224111,13z/data=!3m1!4b1!4m6!3m5!1s0x8e4428dfb80fad05:0x42137cfcc7b53b56!8m2!3d6.2476376!4d-75.5658153!16zL20vMDF4XzZz?entry=ttu&g_ep=EgoyMDI2MDIxMC4wIKXMDSoASAFQAw%3D%3D',
+      href: 'https://www.google.com/maps/place/Medell%C3%ADn',
     },
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    if (sendState === 'sending') return;
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setSendState('sending');
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setFormData({ name: '', email: '', message: '' });
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_email: 'samuel.monsalve.orrego@gmail.com',
+        },
+        PUBLIC_KEY
+      );
 
-    // Reset success message after 5 seconds
-    setTimeout(() => setIsSubmitted(false), 5000);
+      setSendState('sent');
+      setFormData({ name: '', email: '', message: '' });
+
+      // Reset back to idle after 5 seconds
+      setTimeout(() => setSendState('idle'), 5000);
+    } catch (err: unknown) {
+      // Log full error details for debugging
+      console.error('EmailJS error (full object):', err);
+      if (err && typeof err === 'object') {
+        const e = err as Record<string, unknown>;
+        console.error('Status:', e.status);
+        console.error('Text:', e.text);
+      }
+      setSendState('error');
+      // Reset to idle after 5 seconds so user can retry
+      setTimeout(() => setSendState('idle'), 5000);
+    }
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
+  /* ── Button label based on state ── */
+  const buttonContent = () => {
+    if (sendState === 'sending') {
+      return (
+        <span className="flex items-center gap-2">
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+            className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+          />
+          {t('contact.buttons.sending')}
+        </span>
+      );
+    }
+    if (sendState === 'sent') {
+      return (
+        <span className="flex items-center gap-2">
+          <CheckCircle size={18} />
+          {t('contact.buttons.sent')}
+        </span>
+      );
+    }
+    if (sendState === 'error') {
+      return (
+        <span className="flex items-center gap-2">
+          <AlertCircle size={18} />
+          {t('contact.buttons.error')}
+        </span>
+      );
+    }
+    return (
+      <span className="flex items-center gap-2">
+        <Send size={18} />
+        {t('contact.buttons.send')}
+      </span>
+    );
+  };
+
+  const buttonClass = `w-full py-6 rounded-xl btn-glow disabled:opacity-50 disabled:cursor-not-allowed ${sendState === 'sent'
+    ? 'bg-green-600 hover:bg-green-500 text-white'
+    : sendState === 'error'
+      ? 'bg-red-600 hover:bg-red-500 text-white'
+      : 'bg-purple-600 hover:bg-purple-500 text-white'
+    }`;
 
   return (
     <section id="contact" className="py-24 md:py-32">
@@ -150,7 +209,7 @@ export function ContactSection() {
             <div className="p-6 md:p-8 rounded-2xl bg-card border border-border/50">
               <h3 className="text-2xl font-semibold text-foreground mb-6">{t('contact.sendMessage')}</h3>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                     {t('contact.labels.name')}
@@ -163,6 +222,7 @@ export function ContactSection() {
                     value={formData.name}
                     onChange={handleChange}
                     required
+                    disabled={sendState === 'sending'}
                     className="bg-card border-border text-foreground placeholder:text-muted-foreground focus:border-purple-500 focus:ring-purple-500/20"
                   />
                 </div>
@@ -179,6 +239,7 @@ export function ContactSection() {
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    disabled={sendState === 'sending'}
                     className="bg-card border-border text-foreground placeholder:text-muted-foreground focus:border-purple-500 focus:ring-purple-500/20"
                   />
                 </div>
@@ -195,32 +256,17 @@ export function ContactSection() {
                     onChange={handleChange}
                     required
                     rows={5}
+                    disabled={sendState === 'sending'}
                     className="bg-card border-border text-foreground placeholder:text-muted-foreground focus:border-purple-500 focus:ring-purple-500/20 resize-none"
                   />
                 </div>
 
                 <Button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-purple-600 hover:bg-purple-500 text-white py-6 rounded-xl btn-glow disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={sendState === 'sending' || sendState === 'sent'}
+                  className={buttonClass}
                 >
-                  {isSubmitting ? (
-                    <span className="flex items-center gap-2">
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                        className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
-                      />
-                      {t('contact.buttons.sending')}
-                    </span>
-                  ) : isSubmitted ? (
-                    <span>{t('contact.buttons.sent')}</span>
-                  ) : (
-                    <span className="flex items-center gap-2">
-                      <Send size={18} />
-                      {t('contact.buttons.send')}
-                    </span>
-                  )}
+                  {buttonContent()}
                 </Button>
               </form>
             </div>

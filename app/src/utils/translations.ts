@@ -127,15 +127,30 @@ export const translations = {
         send: 'Send Message',
         sending: 'Sending...',
         sent: 'Message sent successfully!',
+        error: 'Error sending. Please try again.',
       },
     },
     footer: {
       rights: 'All rights reserved.',
       madeWith: 'Made with',
-      and: 'and lots of coffee',
+      and: 'and lots of Monster Energy',
     },
     common: {
       languageName: 'Español',
+    },
+    cv: {
+      badge: 'Download',
+      title: 'Which CV do you want?',
+      subtitle: 'Choose the format that best suits your needs.',
+      standard: {
+        label: 'Standard CV',
+        description: 'Professional visual design, ideal for sending directly.',
+      },
+      ats: {
+        label: 'ATS CV',
+        description: 'Optimized for Applicant Tracking Systems (ATS).',
+      },
+      close: 'Close',
     },
   },
   es: {
@@ -265,15 +280,30 @@ export const translations = {
         send: 'Enviar Mensaje',
         sending: 'Enviando...',
         sent: '¡Mensaje enviado con éxito!',
+        error: 'Error al enviar. Inténtalo de nuevo.',
       },
     },
     footer: {
       rights: 'Todos los derechos reservados.',
       madeWith: 'Hecho con',
-      and: 'y mucho café',
+      and: 'y mucha Monster Energy',
     },
     common: {
       languageName: 'English',
+    },
+    cv: {
+      badge: 'Descarga',
+      title: '¿Qué CV deseas?',
+      subtitle: 'Elige el formato que mejor se adapte a tus necesidades.',
+      standard: {
+        label: 'CV Estándar',
+        description: 'Diseño visual profesional, ideal para enviar directamente.',
+      },
+      ats: {
+        label: 'CV ATS',
+        description: 'Optimizado para sistemas de selección automática (ATS).',
+      },
+      close: 'Cerrar',
     },
   },
 };

@@ -58,11 +58,13 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
     font-family: "Inter", system-ui, sans-serif;
+    overflow-x: hidden;
   }
 }
 
@@ -309,20 +311,23 @@
 /* Light mode */
 .light .mkey-cap {
   background: linear-gradient(145deg,
-      hsl(270 25% 93%) 0%,
-      hsl(270 20% 88%) 60%,
-      hsl(270 20% 84%) 100%);
-  border-color: hsl(270 20% 74%);
-  color: hsl(240 10% 40%);
+      hsl(270 30% 95%) 0%,
+      hsl(270 25% 90%) 55%,
+      hsl(270 28% 85%) 100%);
+  border-color: hsl(270 35% 72%);
+  /* Dark purple icon — matches the purple branding */
+  color: hsl(270 65% 28%);
   box-shadow:
-    inset 0 1px 0 0 hsl(0 0% 100% / 0.9),
-    inset 0 -1px 0 0 hsl(270 20% 70%),
-    0 4px 12px -2px hsl(270 20% 60% / 0.25);
+    inset 0 1px 0 0 hsl(0 0% 100% / 0.95),
+    inset 0 -1px 0 0 hsl(270 30% 68%),
+    /* ambient drop shadow with purple tint */
+    0 4px 14px -2px hsl(270 50% 30% / 0.22),
+    0 2px 4px -1px hsl(270 40% 25% / 0.14);
 }
 
 .light .mkey-cap:hover {
-  color: hsl(240 10% 15%);
-  border-color: hsl(270 60% 65% / 0.6);
+  color: hsl(270 70% 22%);
+  border-color: hsl(270 60% 55% / 0.65);
 }
 
 /* ── Glassmorphism tint layer ────────────────────────────────────────────── */
@@ -334,6 +339,14 @@
       rgba(255, 255, 255, 0.04) 0%,
       transparent 50%);
   pointer-events: none;
+}
+
+/* Light mode glass — stronger white sheen for a polished look */
+.light .mkey-glass {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.72) 0%,
+      rgba(230, 210, 255, 0.18) 50%,
+      transparent 100%);
 }
 
 /* ── Shimmer sweep on hover ──────────────────────────────────────────────── */
@@ -371,6 +384,11 @@
   filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.6));
 }
 
+/* Light mode: dark-purple drop-shadow under the icon */
+.light .mkey-icon-wrapper {
+  filter: drop-shadow(0 1px 0 hsl(270 60% 20% / 0.45));
+}
+
 /* ── Key side — the 3-D bottom edge ─────────────────────────────────────── */
 .mkey-side {
   width: 100%;
@@ -381,4 +399,12 @@
       hsl(240 15% 5%) 100%);
   border: 1px solid hsl(240 15% 15%);
   border-top: none;
+}
+
+/* Light mode side: dark purple bottom edge for depth */
+.light .mkey-side {
+  background: linear-gradient(to bottom,
+      hsl(270 40% 55%) 0%,
+      hsl(270 45% 38%) 100%);
+  border-color: hsl(270 45% 34%);
 }

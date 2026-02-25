@@ -1,35 +1,38 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, FileText, Zap } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface CVModalProps {
     isOpen: boolean;
     onClose: () => void;
 }
 
-const cvOptions = [
-    {
-        id: 'standard',
-        label: 'CV Estándar',
-        description: 'Diseño visual profesional, ideal para enviar directamente.',
-        icon: FileText,
-        file: '/CVs/CV_Samuel_Monsalve_Orrego.pdf',
-        filename: 'CV_Samuel_Monsalve_Orrego.pdf',
-        gradient: 'from-purple-500 to-purple-700',
-        glow: 'rgba(168,85,247,0.35)',
-    },
-    {
-        id: 'ats',
-        label: 'CV ATS',
-        description: 'Optimizado para sistemas de selección automática (ATS).',
-        icon: Zap,
-        file: '/CVs/CV_ATS_Samuel_Monsalve_Orrego.pdf',
-        filename: 'CV_ATS_Samuel_Monsalve_Orrego.pdf',
-        gradient: 'from-violet-500 to-indigo-600',
-        glow: 'rgba(139,92,246,0.35)',
-    },
-];
-
 export function CVModal({ isOpen, onClose }: CVModalProps) {
+    const { t } = useLanguage();
+
+    const cvOptions = [
+        {
+            id: 'standard',
+            label: t('cv.standard.label'),
+            description: t('cv.standard.description'),
+            icon: FileText,
+            file: '/CVs/CV_Samuel_Monsalve_Orrego.pdf',
+            filename: 'CV_Samuel_Monsalve_Orrego.pdf',
+            gradient: 'from-purple-500 to-purple-700',
+            glow: 'rgba(168,85,247,0.35)',
+        },
+        {
+            id: 'ats',
+            label: t('cv.ats.label'),
+            description: t('cv.ats.description'),
+            icon: Zap,
+            file: '/CVs/CV_ATS_Samuel_Monsalve_Orrego.pdf',
+            filename: 'CV_ATS_Samuel_Monsalve_Orrego.pdf',
+            gradient: 'from-violet-500 to-indigo-600',
+            glow: 'rgba(139,92,246,0.35)',
+        },
+    ];
+
     const handleDownload = (file: string, filename: string) => {
         const a = document.createElement('a');
         a.href = file;
@@ -81,7 +84,7 @@ export function CVModal({ isOpen, onClose }: CVModalProps) {
                                 <button
                                     onClick={onClose}
                                     className="absolute top-4 right-4 p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent/10 transition-colors"
-                                    aria-label="Cerrar"
+                                    aria-label={t('cv.close')}
                                 >
                                     <X size={18} />
                                 </button>
@@ -90,10 +93,10 @@ export function CVModal({ isOpen, onClose }: CVModalProps) {
                                 <div className="mb-6 text-center">
                                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 mb-4">
                                         <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
-                                        <span className="text-xs text-purple-400 font-medium uppercase tracking-widest">Descarga</span>
+                                        <span className="text-xs text-purple-400 font-medium uppercase tracking-widest">{t('cv.badge')}</span>
                                     </div>
-                                    <h2 className="text-xl font-bold text-foreground">¿Qué CV deseas?</h2>
-                                    <p className="text-sm text-muted-foreground mt-1">Elige el formato que mejor se adapte a tus necesidades.</p>
+                                    <h2 className="text-xl font-bold text-foreground">{t('cv.title')}</h2>
+                                    <p className="text-sm text-muted-foreground mt-1">{t('cv.subtitle')}</p>
                                 </div>
 
                                 {/* Options */}

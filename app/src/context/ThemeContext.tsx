@@ -11,23 +11,16 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // Initialize theme from localStorage or default to 'dark'
+  // First visit → 'dark'. Returning visit → whatever was saved.
   const [theme, setThemeState] = useState<Theme>(() => {
-    const savedTheme = localStorage.getItem('theme') as Theme | null;
-    return savedTheme || 'dark';
+    return (localStorage.getItem('theme') as Theme) || 'dark';
   });
 
-  // Apply theme class to document root and save to localStorage
+  // Apply theme class and persist choice
   useEffect(() => {
     const root = window.document.documentElement;
-    
-    // Remove both classes first
     root.classList.remove('light', 'dark');
-    
-    // Add the current theme class
     root.classList.add(theme);
-    
-    // Save to localStorage
     localStorage.setItem('theme', theme);
   }, [theme]);
 

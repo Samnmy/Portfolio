@@ -1,168 +1,243 @@
-# 🚀 Samuel Monsalve — Personal Portfolio
+# 🚀 Samuel Monsalve — Developer Portfolio
 
-A modern, animated, and fully responsive personal portfolio built to showcase technical skills, projects, and professional experience. Designed with a premium dark aesthetic and high attention to detail.
+> **A futuristic, premium-grade developer portfolio** built with a modern React stack, featuring interactive 3D components, mechanical keyboard sound effects, smooth physics-based animations, dark/light mode, full i18n, and a fully responsive layout.
 
-**Live demo:** [github.com/Samnmy/Portfolio](https://github.com/Samnmy/Portfolio)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vite.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-EF0088?style=flat-square&logo=framer&logoColor=white)](https://www.framer.com/motion/)
 
 ---
 
-## 🧩 Tech Stack
+## ✨ Highlights
 
-| Technology | Purpose |
+| Feature | Description |
 |---|---|
-| **React 18** | UI library — component-based architecture |
-| **TypeScript** | Static typing for robust, maintainable code |
-| **Vite** | Lightning-fast dev server and build tool |
-| **Tailwind CSS** | Utility-first styling + custom design tokens |
-| **Framer Motion** | Animations, gestures, and entrance effects |
-| **Lucide React** | Clean, consistent SVG icon set |
-| **Context API** | Global state for language and theme |
+| 🎹 **3D Mechanical Keys** | GitHub, LinkedIn & Gmail buttons crafted as photorealistic keycaps with PBT-plastic depth, press animation, purple glow and synthesized click sound |
+| 🌐 **Interactive SphereCard** | CSS `preserve-3d` sphere with drag-to-spin interaction, momentum physics, friction deceleration and a spinning conic-gradient halo ring |
+| 🔊 **Web Audio Synthesis** | Real-time mechanical keyboard click sound generated with zero-latency pure Web Audio API — no audio files needed |
+| 🌗 **Dark / Light Mode** | Full theme toggle with curated palettes for each mode — purple branding maintained in both themes |
+| 🌍 **Internationalization** | Spanish / English toggle via a custom React Context |
+| 📱 **Responsive Design** | Mobile-first layout tested from 320 px to 4K — no horizontal scroll anywhere |
+| ⚡ **Physics Animations** | Spring-based press animations with `useSpring` + `useMotionValue` from Framer Motion |
 
 ---
 
-## ✨ Features
+## 🛠️ Tech Stack
 
-### 🌐 Internationalization
-- Full **English / Spanish** toggle with instant UI re-render.
-- All text content lives in `/src/utils/translations.ts` — easy to extend.
+### Languages & Core
+| Technology | Version | Role |
+|---|---|---|
+| **TypeScript** | 5.9 | Type-safe development across the entire codebase |
+| **TSX / JSX** | — | React component syntax |
+| **CSS** | — | Custom properties, keyframe animations, glassmorphism, 3D transforms |
+
+### Framework & Build
+| Technology | Version | Role |
+|---|---|---|
+| **React** | 19 | UI library — hooks, context, refs |
+| **Vite** | 7 | Instant HMR dev server and optimized production bundler |
+| **PostCSS** | 8 | CSS transformation pipeline |
+
+### Styling
+| Technology | Version | Role |
+|---|---|---|
+| **Tailwind CSS** | 3.4 | Utility-first CSS framework |
+| **tailwindcss-animate** | 1.0 | Predefined Tailwind animation utilities |
+| **tailwind-merge** | 3 | Merge conflicting Tailwind class names safely |
+| **class-variance-authority** | 0.7 | Type-safe component variants |
+| **Google Fonts — Inter** | — | Primary typeface throughout the site |
+
+### Animation & Interaction
+| Technology | Version | Role |
+|---|---|---|
+| **Framer Motion** | 12 | Spring physics, layout animations, `useMotionValue`, `useSpring`, `useTransform` |
+| **Web Audio API** | Native | Synthesized mechanical keyboard click sound (zero latency, no files) |
+| **CSS 3D Transforms** | Native | `perspective`, `rotateY`, `preserve-3d`, `backface-visibility` for the sphere and keycaps |
+| **Pointer Events API** | Native | Drag-to-spin on the SphereCard with velocity tracking |
+| **requestAnimationFrame** | Native | Smooth physics loop for the sphere's auto-rotate and coasting |
+
+### UI Components
+| Technology | Version | Role |
+|---|---|---|
+| **Radix UI** | Various | Accessible, headless primitives (Dialog, Accordion, Tooltip, etc.) |
+| **shadcn/ui** | — | Pre-built component layer on top of Radix UI + Tailwind |
+| **lucide-react** | 0.56 | Pixel-perfect SVG icon library |
+
+### Forms & Validation
+| Technology | Version | Role |
+|---|---|---|
+| **react-hook-form** | 7 | Performant form state management |
+| **Zod** | 4 | Schema-based runtime validation |
+| **@hookform/resolvers** | 5 | Zod ↔ react-hook-form bridge |
+
+### Utilities
+| Technology | Version | Role |
+|---|---|---|
+| **clsx** | 2 | Conditional className construction |
+| **next-themes** | 0.4 | SSR-safe dark/light theme provider |
+| **date-fns** | 4 | Date utilities |
+
+### Developer Experience
+| Technology | Version | Role |
+|---|---|---|
+| **ESLint** | 9 | Linting with React hooks and React Refresh plugins |
+| **typescript-eslint** | 8 | TypeScript-aware linting rules |
+
+---
+
+## 🎯 Special Features Deep Dive
+
+### 🎹 Mechanical Keycap Buttons (`MechanicalKey.tsx`)
+
+The social link buttons (GitHub, LinkedIn, Gmail) are fully custom 3D mechanical keyboard keycaps:
+
+- **3D depth illusion** — A separate `.mkey-side` div acts as the physical bottom edge visible below the cap, giving real Z-axis depth perception without WebGL.
+- **Press animation** — On hover, a `useSpring` value (stiffness 420, damping 22) moves the cap down 4 px and simultaneously shrinks the side height, creating a convincing physical press.
+- **PBT plastic material** — The cap uses a `linear-gradient` on a dark/light base to simulate the convex surface texture of real PBT keycaps.
+- **Purple glow ring** — A `motion.span` with layered `box-shadow` fades in on hover via `useSpring` + `useMotionValue`.
+- **Glassmorphism shimmer** — A sweeping gradient layer (`mkey-shimmer`) rides across the cap surface when hovered.
+- **Web Audio click** — Every hover triggers `useMechanicalSound`, which synthesizes a 3-layer sound in real time:
+  1. **Noise burst** — 25 ms of bandpass-filtered white noise (3200 Hz) for the "tick" transient.
+  2. **Tonal thump** — A square oscillator that sweeps 260 Hz → 80 Hz in 18 ms for the low-mid body.
+  3. **High-frequency snap** — A 5800 Hz sine wave that decays in 8 ms for the tactile "snap" feel.
+
+### 🌐 Interactive SphereCard (`SphereCard.tsx`)
+
+A pure CSS/DOM 3D sphere with photo on the front and the "SM" monogram on the back:
+
+- **CSS `preserve-3d`** — A `div` with `transformStyle: preserve-3d` holds two absolutely-positioned circular faces (`backface-visibility: hidden`). The back face is pre-rotated 180°.
+- **Auto-rotation** — A `requestAnimationFrame` loop increments `angleY` by `BASE_SPEED` (1.2°/frame) and applies it directly through a DOM ref, producing zero unnecessary React re-renders.
+- **Drag-to-spin** — `onPointerDown/Move/Up` events track the cursor delta to compute a velocity in deg/frame. `setPointerCapture` keeps the drag alive even when the cursor leaves the element.
+- **Momentum physics** — On pointer release the sphere enters a "coasting" state. Framerate-independent friction (`Math.pow(FRICTION, dt/16.667)`) decelerates the spin until it seamlessly blends back to auto-rotation speed via linear interpolation.
+- **Spinning halo ring** — A conic-gradient on a transparent-border div spins via a CSS keyframe animation (`sphere-ring-spin`), creating an aurora-like arc that traces the equator.
+- **Ambient glow** — Layered `box-shadow` values produce a soft purple aura around the sphere.
 
 ### 🌗 Dark / Light Mode
-- Fully themed with CSS custom properties (`hsl(var(--*))`).
-- Every component adapts correctly to both modes with no hardcoded colors.
 
-### 📱 Responsive Design
-- Mobile-first layout adapts from 320px to 4K.
-- Floating navbar collapses into an animated full-screen mobile menu.
+- Implemented with `next-themes` provider at the app root.
+- CSS custom properties (HSL) drive all colors — switching themes requires zero JavaScript color logic.
+- The mechanical keys have a dedicated light-mode palette: lavender cap surface, dark-purple icons (`hsl(270 65% 28%)`), and a deep-purple 3D bottom edge for depth.
 
-### 🎯 Sections
-| Section | Description |
-|---|---|
-| **Hero** | Animated introduction with 3D interactive sphere, CTA buttons, and CV download modal |
-| **About** | Personal highlights and characteristic cards |
-| **Skills** | Animated progress bars grouped by technology area |
-| **Projects** | Featured project gallery with live demo and GitHub links |
-| **Experience** | Professional timeline |
-| **Contact** | Contact form with styled terminal aesthetic |
+### 🌍 Internationalization (i18n)
+
+- Custom `LanguageContext` + `useLanguage` hook expose a `t(key)` function similar to i18next, but with zero bundle overhead.
+- Supports **Spanish** and **English** — toggleable from the Navbar at runtime.
 
 ---
 
-## 🌀 3D Interactive Sphere (Hero Section)
-
-A custom `SphereCard` component built with pure CSS 3D transforms — **no Three.js, no canvas, no heavy libraries**.
-
-### How it works
+## 📁 Project Structure
 
 ```
-CSS engine:   perspective + transform-style: preserve-3d
-Rotation:     requestAnimationFrame loop (zero React re-renders)
-Physics:      velocity-based inertia with framerate-independent friction
-```
-
-**Front face:** Professional photo (`/public/images/samuel.jpg`), circular with a subtle specular highlight overlay.
-
-**Back face:** "SM" monogram with a purple gradient on a glassmorphism background.
-
-### Interaction model
-
-| Event | Behavior |
-|---|---|
-| Auto (idle) | Slow continuous Y-axis rotation at `BASE_SPEED` |
-| `pointerdown` | Captures pointer, resets velocity to 0 |
-| `pointermove` | Computes velocity as `Δpx / Δms × 16.667` (framerate-independent) |
-| `pointerup` | Releases pointer, enters **coasting** mode |
-| Coasting | `velocity *= FRICTION^(dt/16.667)` each frame |
-| Velocity → 0 | Smoothly interpolates back to `BASE_SPEED` (no snap) |
-
-### Tunable constants (`SphereCard.tsx`)
-
-| Constant | Default | Effect |
-|---|---|---|
-| `BASE_SPEED` | `1.2` | Auto-rotation speed (deg/frame) |
-| `DRAG_SENSITIVITY` | `0.55` | Drag responsiveness |
-| `FRICTION` | `0.92` | Deceleration rate after release |
-| `MAX_VELOCITY` | `12` | Cap to prevent wild spins |
-| `SPHERE_SIZE` | `180` | Diameter in px |
-
-**To change the photo:** drop any image into `public/images/` and update `PHOTO_SRC` at the top of `SphereCard.tsx`.
-
----
-
-## 📄 CV Download Modal
-
-A polished modal (`CVModal.tsx`) launched from the **CV** button in the Hero section.
-
-- Centered on screen with backdrop blur
-- Two download options:
-  - **CV Estándar** — visual design format (`CV_Samuel_Monsalve_Orrego.pdf`)
-  - **CV ATS** — plain-text optimized for applicant tracking systems (`CV_ATS_Samuel_Monsalve_Orrego.pdf`)
-- PDFs live in `/public/CVs/`
-
----
-
-## 📂 Project Structure
-
-```
-Portfolio/
-└── app/
-    ├── public/
-    │   ├── images/          # Profile photo (samuel.jpg)
-    │   └── CVs/             # CV PDF files
-    └── src/
-        ├── components/
-        │   ├── animations/
-        │   │   ├── SphereCard.tsx    # 3D interactive sphere
-        │   │   ├── GradientText.tsx  # Purple gradient text
-        │   │   └── FadeIn.tsx        # Scroll-triggered fade
-        │   ├── layout/
-        │   │   ├── Navbar.tsx        # Floating responsive navbar
-        │   │   └── Footer.tsx
-        │   └── ui/
-        │       ├── CVModal.tsx       # CV download modal
-        │       └── ...               # shadcn/ui primitives
-        ├── context/
-        │   ├── LanguageContext.tsx   # EN/ES i18n
-        │   └── ThemeContext.tsx      # Dark/Light mode
-        ├── sections/
-        │   ├── HeroSection.tsx
-        │   ├── AboutSection.tsx
-        │   ├── SkillsSection.tsx
-        │   ├── ProjectsSection.tsx
-        │   ├── ExperienceSection.tsx
-        │   └── ContactSection.tsx
-        └── utils/
-            └── translations.ts      # All UI strings (EN + ES)
+app/
+├── public/
+│   ├── icon/              # Favicon (Gengar.png)
+│   └── images/            # Profile photo (samuel.jpg)
+│
+├── src/
+│   ├── sections/          # Full-page sections
+│   │   ├── HeroSection.tsx        # Landing — SphereCard + MechanicalKey buttons + CTA
+│   │   ├── AboutSection.tsx       # Biography and personal info
+│   │   ├── SkillsSection.tsx      # Tech skills with progress indicators
+│   │   ├── ProjectsSection.tsx    # Portfolio project cards
+│   │   ├── ExperienceSection.tsx  # Work & education timeline
+│   │   └── ContactSection.tsx     # Contact cards + message form
+│   │
+│   ├── components/
+│   │   ├── animations/
+│   │   │   ├── SphereCard.tsx     # Interactive 3D CSS sphere with physics
+│   │   │   ├── GradientText.tsx   # Animated gradient text wrapper
+│   │   │   └── FadeIn.tsx         # Scroll-triggered entrance animation
+│   │   ├── layout/
+│   │   │   ├── Navbar.tsx         # Sticky nav — theme + language toggles
+│   │   │   └── Footer.tsx         # Footer with social links
+│   │   └── ui/
+│   │       ├── MechanicalKey.tsx  # 3D keycap button with sound
+│   │       ├── CVModal.tsx        # PDF CV viewer modal
+│   │       └── ...                # shadcn/ui primitives (Button, Input, etc.)
+│   │
+│   ├── context/
+│   │   └── LanguageContext.tsx    # i18n context — ES / EN translations
+│   │
+│   ├── hooks/
+│   │   ├── useMechanicalSound.ts  # Web Audio API keyboard click synthesizer
+│   │   ├── useScrollPosition.ts   # Scroll offset tracking
+│   │   └── use-mobile.ts          # Responsive breakpoint detection
+│   │
+│   ├── lib/
+│   │   └── utils.ts               # clsx + tailwind-merge helper
+│   │
+│   ├── index.css                  # Global CSS — design tokens, mkey-* styles
+│   └── App.tsx                    # Root component — section composition
+│
+├── tailwind.config.js             # Extended palette, animation config
+├── vite.config.ts                 # Path aliases (@/ → src/)
+└── package.json                   # Dependencies and scripts
 ```
 
 ---
 
-## 🛠️ Getting Started
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Node.js** ≥ 18
+- **npm** ≥ 9
+
+### Installation
 
 ```bash
-# 1. Clone the repo
+# Clone the repository
 git clone https://github.com/Samnmy/Portfolio.git
 cd Portfolio/app
 
-# 2. Install dependencies
+# Install dependencies
 npm install
+```
 
-# 3. Start dev server
+### Development
+
+```bash
 npm run dev
-# → http://localhost:5173
+```
 
-# 4. Build for production
-npm run build
+The dev server starts at **http://localhost:5173** with instant Hot Module Replacement.
+
+### Production Build
+
+```bash
+npm run build       # TypeScript check + Vite bundle
+npm run preview     # Preview the production build locally
+```
+
+### Lint
+
+```bash
+npm run lint
 ```
 
 ---
 
-## 📌 Recent Updates
+## 📞 Contact
 
-- **3D Interactive Sphere** — Physics-based inertia drag, auto-rotation, front/back faces
-- **CV Download Modal** — Two-format CV selector with styled dialog
-- **Hero Layout Fixes** — Proper navbar clearance, scroll indicator positioning
-- **Theme-aware Components** — All colors use CSS variables, compatible with dark and light mode
-- **Internationalization Expansion** — Full EN/ES support across all new components
+| Channel | Details |
+|---|---|
+| 📧 **Email** | [samuel.monsalve.orrego@gmail.com](mailto:samuel.monsalve.orrego@gmail.com) |
+| 💼 **LinkedIn** | [linkedin.com/in/samuel-monsalve-orrego](https://www.linkedin.com/in/samuel-monsalve-orrego) |
+| 🐙 **GitHub** | [github.com/Samnmy](https://github.com/Samnmy) |
+| 📍 **Location** | Medellín, Antioquia, Colombia |
 
 ---
 
-Created with ❤️ by **Samuel Monsalve** · [LinkedIn](https://www.linkedin.com/in/samuel-monsalve-orrego) · [GitHub](https://github.com/Samnmy)
+## 📄 License
+
+This project is personal and proprietary. All rights reserved © 2026 Samuel Monsalve Orrego.
+
+---
+
+<p align="center">
+  Designed & built with ❤️ by <strong>Samuel Monsalve Orrego</strong>
+  <br />
+  <em>Medellín, Colombia · 2026</em>
+</p>

@@ -60,7 +60,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-bold tracking-tight mb-4 whitespace-nowrap"
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-bold tracking-tight mb-4"
           >
             {t('hero.greeting')} <GradientText>Samuel Monsalve</GradientText>
           </motion.h1>
@@ -70,7 +70,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-muted-foreground mb-8"
+            className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-muted-foreground mb-8"
           >
             {t('hero.role')}
           </motion.h2>
