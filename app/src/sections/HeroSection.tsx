@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CVModal } from '@/components/ui/CVModal';
+import { MechanicalKey } from '@/components/ui/MechanicalKey';
 import { GradientText } from '@/components/animations/GradientText';
 import { SphereCard } from '@/components/animations/SphereCard';
 import { useLanguage } from '@/context/LanguageContext';
@@ -12,6 +13,7 @@ const socialLinks = [
   { name: 'LinkedIn', href: 'https://www.linkedin.com/in/samuel-monsalve-orrego', icon: Linkedin },
   { name: 'Email', href: 'mailto:samuel.monsalve.orrego@gmail.com', icon: Mail },
 ];
+
 
 export function HeroSection() {
   const { t } = useLanguage();
@@ -106,27 +108,20 @@ export function HeroSection() {
             </Button>
           </motion.div>
 
-          {/* Social Links */}
+          {/* Social Links — Mechanical Keys */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 1, ease: [0.16, 1, 0.3, 1] }}
             className="flex items-center justify-center gap-4"
           >
-            {socialLinks.map((link, index) => (
-              <motion.a
+            {socialLinks.map((link) => (
+              <MechanicalKey
                 key={link.name}
+                icon={link.icon}
                 href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 1 + index * 0.05 }}
-                className="p-3 rounded-xl bg-card border border-border text-muted-foreground hover:text-foreground hover:bg-accent/10 hover:border-purple-500/30 transition-all"
-                aria-label={link.name}
-              >
-                <link.icon size={20} />
-              </motion.a>
+                label={link.name}
+              />
             ))}
           </motion.div>
         </div>

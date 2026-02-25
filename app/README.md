@@ -1,73 +1,118 @@
-# React + TypeScript + Vite
+# 🚀 Portfolio — Samuel Monsalve Orrego
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Portfolio personal desarrollado con **React**, **TypeScript**, **Tailwind CSS** y **Framer Motion**. Diseño futurista, dark-mode con acento morado, totalmente responsive.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Características
 
-## React Compiler
+- **Hero Section** con esfera 3D interactiva, botones de CTA y teclas mecánicas para redes sociales
+- **About Section** con presentación y stack tecnológico
+- **Experience Section** con línea de tiempo profesional
+- **Projects Section** con tarjetas de proyectos destacados
+- **Skills Section** con barras de progreso animadas
+- **Contact Section** estilo terminal / transmisión
+- Soporte bilingüe **ES / EN** mediante `LanguageContext`
+- **Modal de CV** con vista previa y descarga directa
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🎹 Teclas Mecánicas — Social Icons
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Los íconos de **GitHub**, **LinkedIn** y **Gmail** en la hero section son teclas de teclado mecánico 3D interactivas, construidas con:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+| Tecnología | Uso |
+|---|---|
+| **Framer Motion** | Spring physics (`stiffness: 420, damping: 22`) para el efecto de tecla presionada |
+| **CSS 3D transforms** | Keycap con gradiente PBT-style + `div` lateral para profundidad real |
+| **Web Audio API** | Sonido de click sintetizado en tiempo real — sin archivos de audio, cero latencia |
+| **React hooks** | `useMechanicalSound` encapsula la síntesis de audio de forma reutilizable |
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Comportamiento
+- **Hover** → la tecla se presiona 4px hacia abajo con rebote suave + glow morado + shimmer diagonal + sonido de click
+- **Click** → feedback adicional de escala + segundo sonido
+- **Leave** → vuelve a su posición con spring physics
+- El borde lateral visible se contrae al mismo tiempo que el keycap baja, simulando perspectiva real
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Componente reutilizable
+
+```tsx
+import { MechanicalKey } from '@/components/ui/MechanicalKey';
+import { Github } from 'lucide-react';
+
+<MechanicalKey
+  icon={Github}
+  href="https://github.com/Samnmy"
+  label="GitHub"
+/>
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+**Props:** `icon`, `href`, `label`, `iconSize` (default `20`)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠️ Stack Tecnológico
+
+- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite 7](https://vitejs.dev/)
+- [Tailwind CSS 3](https://tailwindcss.com/)
+- [Framer Motion 12](https://www.framer.com/motion/)
+- [Lucide React](https://lucide.dev/)
+- [Radix UI](https://www.radix-ui.com/)
+- [shadcn/ui](https://ui.shadcn.com/)
+- Web Audio API (nativo del navegador)
+
+---
+
+## 📁 Estructura del Proyecto
+
 ```
+app/
+├── src/
+│   ├── components/
+│   │   ├── ui/
+│   │   │   ├── MechanicalKey.tsx   ← teclas mecánicas 3D
+│   │   │   ├── CVModal.tsx
+│   │   │   └── ...
+│   │   ├── animations/
+│   │   │   ├── SphereCard.tsx
+│   │   │   └── GradientText.tsx
+│   │   └── layout/
+│   ├── hooks/
+│   │   └── useMechanicalSound.ts   ← síntesis de audio Web Audio API
+│   ├── sections/
+│   │   ├── HeroSection.tsx
+│   │   ├── AboutSection.tsx
+│   │   ├── ExperienceSection.tsx
+│   │   ├── ProjectsSection.tsx
+│   │   ├── SkillsSection.tsx
+│   │   └── ContactSection.tsx
+│   ├── context/
+│   │   └── LanguageContext.tsx
+│   └── index.css
+└── public/
+    └── icon/
+```
+
+---
+
+## 🚀 Desarrollo Local
+
+```bash
+# Instalar dependencias
+npm install
+
+# Servidor de desarrollo (http://localhost:5173)
+npm run dev
+
+# Build de producción
+npm run build
+```
+
+---
+
+## 🔗 Links
+
+- **GitHub:** [github.com/Samnmy](https://github.com/Samnmy)
+- **LinkedIn:** [linkedin.com/in/samuel-monsalve-orrego](https://www.linkedin.com/in/samuel-monsalve-orrego)
+- **Email:** samuel.monsalve.orrego@gmail.com
