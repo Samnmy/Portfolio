@@ -36,7 +36,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           transition={{ duration: 0.4 }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-60" />
-        
+
         {/* Overlay links */}
         <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
           {project.github && (
@@ -72,7 +72,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         <p className="text-muted-foreground text-sm leading-relaxed mb-4">
           {project.description}
         </p>
-        
+
         {/* Tech tags */}
         <div className="flex flex-wrap gap-2">
           {project.tech.map((tech) => (
@@ -150,14 +150,20 @@ export function ProjectsSection() {
 
         {/* View All Button */}
         <FadeIn delay={0.4} className="text-center">
-          <Button
-            variant="outline"
-            size="lg"
-            className="border-border hover:bg-accent/10 text-foreground px-8 py-6 rounded-xl group"
+          <a
+            href="https://github.com/Samnmy"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            {t('projects.viewAll')}
-            <ExternalLink size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
-          </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-border hover:bg-accent/10 text-foreground px-8 py-6 rounded-xl group"
+            >
+              {t('projects.viewAll')}
+              <ExternalLink size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </a>
         </FadeIn>
       </div>
     </section>
